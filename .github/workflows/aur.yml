@@ -15,16 +15,14 @@ jobs:
           ssh-private-key: ${{ secrets.AUR_SSH_KEY }}
       - name: Publish to AUR
         run: |
+          ssh-keyscan -t rsa aur.archlinux.org >> ~/.ssh/known_hosts
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
-          ssh-keyscan -t rsa aur.archlinux.org >> ~/.ssh/known_hosts
-          git clone ssh://aur@aur.archlinux.org/vantage-git.git aur-repo
-          cp aur/PKGBUILD aur/.SRCINFO aur-repo/
-          cd aur-repo
+          rm -rf aur-repo && mkdir aur-repo && cd aur-repo
+          git init -q
+          git branch -M master
+          git remote add origin ssh://aur@aur.archlinux.org/vantage-git.git
+          cp ../aur/PKGBUILD ../aur/.SRCINFO .
           git add -A
-          if git diff --cached --quiet; then
-            echo "No AUR changes."
-          else
-            git commit -m "Update to ${{ github.ref_name }}"
-            git push
-          fi
+          git commit -q -m "Update to ${{ github.ref_name }}"
+          git push -u origin master
