@@ -40,16 +40,20 @@
 ## 🚀 Install
 
 ```bash
+# From PyPI (recommended)
+pip install vantage-cli
+
+# Or straight from the repo
 pip install git+https://github.com/androvonx95/vantage.git
+
+# Arch Linux (AUR)
+yay -S vantage-git
 ```
 
 That's it — the core has **no required dependencies** beyond `rich`.
 
-> 📦 A PyPI release (`pip install vantage`) is coming soon. Want to be notified?
-> Join the [Vantage Cloud waitlist](https://androvonx95.github.io/vantage/#waitlist).
->
-> Want the optional AI networking niceties? Append `[ai]` to the install URL:
-> `pip install "git+https://github.com/androvonx95/vantage.git#egg=vantage[ai]"`
+> Want the optional AI networking niceties? Append `[ai]`:
+> `pip install "vantage-cli[ai]"`
 
 ## 🖥 Usage
 

@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "vantage"
+name = "vantage-cli"
 version = "0.1.0"
 description = "Offline-first command center for your codebase: interactive knowledge graphs, git intelligence, security & quality scans, and optional local-AI superpowers."
 readme = "README.md"
