@@ -6,7 +6,7 @@
   <a href="https://github.com/androvonx95/vantage/actions/workflows/tests.yml"><img src="https://github.com/androvonx95/vantage/actions/workflows/tests.yml/badge.svg" alt="tests"></a>
   <a href="https://github.com/androvonx95/vantage/releases"><img src="https://img.shields.io/github/v/release/androvonx95/vantage" alt="release"></a>
   <a href="https://github.com/androvonx95/vantage/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="license"></a>
-  <a href="https://pypi.org/project/vantage/"><img src="https://img.shields.io/badge/pypi-v0.1.0-orange" alt="pypi"></a>
+  <a href="https://pypi.org/project/maplens/"><img src="https://img.shields.io/badge/pypi-v0.1.0-orange" alt="pypi"></a>
   <a href="https://github.com/androvonx95/vantage"><img src="https://img.shields.io/github/stars/androvonx95/vantage?style=social" alt="stars"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-indigo" alt="python">
   <img src="https://img.shields.io/badge/core%20deps-zero-0a0" alt="deps">
@@ -40,8 +40,8 @@
 ## 🚀 Install
 
 ```bash
-# From PyPI (recommended)
-pip install vantage-cli
+# From PyPI (recommended) — distributed as `maplens`, run as `vantage`
+pip install maplens
 
 # Or straight from the repo
 pip install git+https://github.com/androvonx95/vantage.git
@@ -52,8 +52,11 @@ yay -S vantage-git
 
 That's it — the core has **no required dependencies** beyond `rich`.
 
+> The PyPI package is named `maplens` (the `vantage` name is taken on PyPI);
+> the CLI command and import remain `vantage`.
+>
 > Want the optional AI networking niceties? Append `[ai]`:
-> `pip install "vantage-cli[ai]"`
+> `pip install "maplens[ai]"`
 
 ## 🖥 Usage
 
