@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# Vantage outputs
+vantage-map.html
+
+# OS / editor
+.DS_Store
+*.swp
+
+# local config
+config.json

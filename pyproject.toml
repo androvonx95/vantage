@@ -1,0 +1,48 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vantage"
+version = "0.1.0"
+description = "Offline-first command center for your codebase: interactive knowledge graphs, git intelligence, security & quality scans, and optional local-AI superpowers."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Vantage Contributors" }]
+keywords = [
+    "codebase",
+    "knowledge-graph",
+    "git-analytics",
+    "static-analysis",
+    "developer-tools",
+    "cli",
+    "ai",
+    "local-first",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Utilities",
+]
+dependencies = ["rich>=13.0.0"]
+
+[project.optional-dependencies]
+ai = ["requests>=2.28.0"]
+
+[project.urls]
+Homepage = "https://github.com/androvonx95/vantage"
+Documentation = "https://github.com/androvonx95/vantage#readme"
+Repository = "https://github.com/androvonx95/vantage"
+Issues = "https://github.com/androvonx95/vantage/issues"
+"Sponsor / Vantage Cloud" = "https://github.com/sponsors/androvonx95"
+
+[project.scripts]
+vantage = "vantage.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["vantage"]

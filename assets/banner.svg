@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="240" viewBox="0 0 1200 240">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1020"/>
+      <stop offset="1" stop-color="#121a30"/>
+    </linearGradient>
+    <linearGradient id="ac" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="240" fill="url(#bg)"/>
+  <g fill="none" stroke="#243150" stroke-width="1.5">
+    <circle cx="980" cy="120" r="70"/>
+    <circle cx="980" cy="120" r="45"/>
+    <line x1="980" y1="120" x2="860" y2="70"/>
+    <line x1="980" y1="120" x2="870" y2="175"/>
+    <line x1="980" y1="120" x2="1080" y2="90"/>
+    <line x1="980" y1="120" x2="1085" y2="160"/>
+  </g>
+  <g fill="#6366f1">
+    <circle cx="860" cy="70" r="6"/><circle cx="870" cy="175" r="6"/>
+    <circle cx="1080" cy="90" r="6"/><circle cx="1085" cy="160" r="6"/>
+    <circle cx="980" cy="120" r="9" fill="url(#ac)"/>
+  </g>
+  <text x="70" y="120" font-family="ui-sans-serif,system-ui,Segoe UI,Roboto,sans-serif"
+        font-size="78" font-weight="800" fill="url(#ac)">⛰ VANTAGE</text>
+  <text x="74" y="170" font-family="ui-sans-serif,system-ui,sans-serif"
+        font-size="26" fill="#8aa0c2">offline-first command center for your codebase</text>
+</svg>
