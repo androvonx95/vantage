@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import fnmatch
 import os
 from pathlib import Path
 from typing import Iterator, List, Optional
@@ -12,25 +13,47 @@ from .languages import (
 from .model import RepoStats, SourceFile
 
 MAX_FILE_BYTES = 2_000_000  # skip huge generated files
+SOURCE_EXTS = {
+    ".py", ".js", ".jsx", ".ts", ".tsx", ".go", ".rs", ".java", ".kt", ".c",
+    ".h", ".cpp", ".cc", ".hpp", ".cs", ".rb", ".php", ".swift", ".scala",
+    ".sh", ".bash", ".zsh", ".lua", ".sql", ".html", ".css", ".vue", ".r",
+    ".m", ".dart",
+}
+
+
+def load_ignore(root: Path) -> List[str]:
+    """Read a .vantageignore file (gitignore-style globs) if present."""
+    patterns: List[str] = []
+    f = root / ".vantageignore"
+    if f.exists():
+        for line in f.read_text(encoding="utf-8", errors="replace").splitlines():
+            line = line.strip()
+            if line and not line.startswith("#"):
+                patterns.append(line)
+    return patterns
+
+
+def _ignored(rel: str, patterns: List[str]) -> bool:
+    return any(fnmatch.fnmatch(rel, p.rstrip("/")) or
+               fnmatch.fnmatch(rel, p.rstrip("/") + "/*")
+               for p in patterns)
 
 
 def iter_source_files(root: Path) -> Iterator[Path]:
+    patterns = load_ignore(root)
     for dirpath, dirnames, filenames in os.walk(root):
         dirnames[:] = [d for d in dirnames if d not in IGNORE_DIRS]
         for name in filenames:
             p = Path(dirpath) / name
-            if p.suffix.lower() not in (".py", ".js", ".jsx", ".ts", ".tsx",
-                                        ".go", ".rs", ".java", ".kt", ".c",
-                                        ".h", ".cpp", ".cc", ".hpp", ".cs",
-                                        ".rb", ".php", ".swift", ".scala",
-                                        ".sh", ".bash", ".zsh", ".lua", ".sql",
-                                        ".html", ".css", ".vue", ".r", ".m",
-                                        ".dart"):
+            if p.suffix.lower() not in SOURCE_EXTS:
                 continue
             try:
                 if p.stat().st_size > MAX_FILE_BYTES:
                     continue
             except OSError:
+                continue
+            rel = str(p.relative_to(root))
+            if _ignored(rel, patterns):
                 continue
             yield p
 

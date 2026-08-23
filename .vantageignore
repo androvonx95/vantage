@@ -1,0 +1,3 @@
+# Vantage ignore file (gitignore-style globs).
+# Files here are skipped by `scan`, `map`, and analysis.
+tests/

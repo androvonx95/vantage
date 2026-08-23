@@ -125,6 +125,25 @@ def print_ai_status(cfg: AIConfig) -> None:
                       "(uses local Ollama or any OpenAI-compatible API).")
 
 
+def print_score(result: dict) -> None:
+    score = result.get("score", 0)
+    from ..analytics.health import grade
+    color = "green" if score >= 70 else ("yellow" if score >= 50 else "red")
+    console.print(Panel(
+        f"[bold {color}]{score}/100[/bold {color}]  [bold]Grade {grade(score)}[/bold]",
+        title="⚑ Codebase Health Score", border_style=color))
+    bar = Table(expand=True)
+    bar.add_column("Component", style="cyan", no_wrap=True)
+    bar.add_column("Score", justify="right", style="bold")
+    bar.add_column("Bar", no_wrap=True)
+    for name, val in result.get("components", {}).items():
+        c = "green" if val >= 70 else ("yellow" if val >= 50 else "red")
+        filled = "█" * (val // 5)
+        empty = "░" * (20 - val // 5)
+        bar.add_row(name, str(val), f"[{c}]{filled}{empty}[/{c}]")
+    console.print(bar)
+
+
 def spinner(msg: str):
     return Progress(SpinnerColumn(), TextColumn(msg), console=console, transient=True)
 

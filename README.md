@@ -48,6 +48,7 @@ That's it — the core has **no required dependencies** beyond `rich`.
 vantage                 # launch the dashboard (overview)
 vantage insights        # git intelligence + repo insights
 vantage scan            # security & quality scan
+vantage score           # codebase health score (0-100) + breakdown
 vantage map             # generate interactive HTML knowledge graph
 vantage ai setup        # configure local AI (Ollama by default)
 vantage ai doc file.py  # AI summarizes a file
@@ -56,6 +57,12 @@ vantage ai review -     # AI reviews a diff from stdin
 vantage ai pr -         # AI writes a PR description from a diff
 vantage doctor          # environment check
 ```
+
+### 📛 Ignoring paths
+
+Drop a `.vantageignore` file (gitignore-style globs) in your repo to skip
+files/dirs from scanning and graph-building — handy for excluding test fixtures
+or generated code.
 
 ### Example: the knowledge graph
 

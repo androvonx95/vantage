@@ -103,6 +103,17 @@ def cmd_ai(args):
         display.print_ai_status(cfg)
 
 
+def cmd_score(args):
+    stats = _load(args.path)
+    git = analyze_git(args.path)
+    with display.spinner("Scoring codebase health…") as prog:
+        prog.add_task("score", total=None)
+        report = scan_quality(stats)
+    from .analytics.health import compute_health
+    result = compute_health(stats, git, report)
+    display.print_score(result)
+
+
 def cmd_doctor(args):
     display.print_banner()
     from .ai.provider import AIConfig
@@ -140,6 +151,7 @@ def build_parser() -> argparse.ArgumentParser:
     add_path(sub.add_parser("overview", help="Dashboard: overview + languages + contributors"))
     add_path(sub.add_parser("insights", help="Git intelligence & repo insights"))
     add_path(sub.add_parser("scan", help="Security & quality scan"))
+    add_path(sub.add_parser("score", help="Codebase health score (0-100)"))
     m = sub.add_parser("map", help="Generate an interactive HTML knowledge graph")
     add_path(m)
     m.add_argument("-o", "--output", default=None, help="Output HTML path")
@@ -161,8 +173,8 @@ def main(argv=None) -> int:
     cmd = args.command or "overview"
     dispatch = {
         "overview": cmd_overview, "dashboard": cmd_overview,
-        "insights": cmd_insights, "scan": cmd_scan, "map": cmd_map,
-        "ai": cmd_ai, "doctor": cmd_doctor,
+        "insights": cmd_insights, "scan": cmd_scan, "score": cmd_score,
+        "map": cmd_map, "ai": cmd_ai, "doctor": cmd_doctor,
     }
     try:
         dispatch[cmd](args)
