@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vantage — offline-first command center for your codebase</title>
+<meta name="description" content="Turn any repository into an interactive knowledge graph, get instant git intelligence, run security & quality scans, and unlock local-AI superpowers — all from one beautiful CLI." />
+<style>
+  :root{
+    --bg:#070b16; --bg2:#0b1224; --panel:#0f1830; --panel2:#0c1326;
+    --text:#e8eefb; --muted:#93a4c6; --line:#1d2a4a;
+    --accent:#6366f1; --accent2:#06b6d4; --good:#10b981; --warn:#f59e0b;
+  }
+  *{box-sizing:border-box;scroll-behavior:smooth}
+  html,body{margin:0;background:radial-gradient(1200px 600px at 70% -10%,#16204a 0%,var(--bg) 55%);
+    color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Inter,sans-serif;line-height:1.6}
+  a{color:var(--accent2);text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  header.nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);
+    background:rgba(7,11,22,.72);border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;align-items:center;gap:18px;height:62px}
+  .brand{font-weight:800;font-size:20px;letter-spacing:.4px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;
+    background-clip:text;color:transparent}
+  .nav nav{margin-left:auto;display:flex;gap:22px;font-size:14px}
+  .nav nav a{color:var(--muted)}
+  .nav nav a:hover{color:var(--text)}
+  .btn{display:inline-block;padding:11px 18px;border-radius:11px;font-weight:700;font-size:14px;
+    border:1px solid transparent;transition:.15s}
+  .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff}
+  .btn.primary:hover{transform:translateY(-1px);filter:brightness(1.07)}
+  .btn.ghost{border-color:var(--line);color:var(--text);background:var(--panel)}
+  .btn.ghost:hover{border-color:var(--accent)}
+  .hero{padding:84px 0 60px;text-align:center}
+  .pill{display:inline-block;font-size:12px;color:var(--muted);border:1px solid var(--line);
+    padding:5px 12px;border-radius:999px;margin-bottom:22px;background:var(--panel2)}
+  .hero h1{font-size:clamp(34px,6vw,62px);line-height:1.05;margin:0 0 18px;font-weight:850;
+    background:linear-gradient(90deg,#fff 30%,#aab6e0);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{font-size:19px;color:var(--muted);max-width:680px;margin:0 auto 30px}
+  .hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .features{padding:40px 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);
+    border-radius:16px;padding:22px;transition:.15s}
+  .card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .card .ico{font-size:26px}
+  .card h3{margin:10px 0 6px;font-size:18px}
+  .card p{margin:0;color:var(--muted);font-size:14px}
+  .section{padding:56px 0}
+  .section h2{font-size:30px;text-align:center;margin:0 0 10px}
+  .section .sub{text-align:center;color:var(--muted);margin:0 auto 34px;max-width:620px}
+  pre.term{background:#05080f;border:1px solid var(--line);border-radius:14px;padding:18px 20px;
+    overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;color:#cdd9ee}
+  pre.term .c{color:var(--accent2)} pre.term .g{color:var(--good)} pre.term .m{color:var(--muted)}
+  .pricing .grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .price{border:1px solid var(--line);border-radius:18px;padding:26px;background:var(--panel);text-align:center}
+  .price.pop{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 18px 50px -20px var(--accent)}
+  .price h3{margin:0;font-size:20px}
+  .price .amt{font-size:38px;font-weight:850;margin:12px 0 4px}
+  .price ul{list-style:none;padding:0;margin:16px 0;color:var(--muted);font-size:14px;text-align:left}
+  .price li{padding:5px 0;border-bottom:1px dashed var(--line)}
+  .waitlist{max-width:560px;margin:0 auto;background:var(--panel);border:1px solid var(--line);
+    border-radius:18px;padding:30px;text-align:center}
+  .waitlist input{width:100%;padding:13px 15px;border-radius:11px;border:1px solid var(--line);
+    background:var(--panel2);color:var(--text);margin:8px 0 14px;font-size:15px;outline:none}
+  .waitlist input:focus{border-color:var(--accent)}
+  footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:13px;text-align:center}
+  .logos{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+  .stat-row{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+  .stat b{font-size:30px;display:block;background:linear-gradient(90deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat span{color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <div class="brand">⛰ Vantage</div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#install">Install</a>
+      <a href="#cloud">Vantage Cloud</a>
+      <a href="https://github.com/androvonx95/vantage">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="pill">⚡ MIT · zero core deps · runs 100% offline</span>
+    <h1>The command center<br>for your codebase.</h1>
+    <p>Turn any repository into an <b>interactive knowledge graph</b>, get instant
+       <b>git intelligence</b>, run a <b>security &amp; quality scan</b>, and unlock
+       <b>local-AI superpowers</b> — all from one beautiful CLI. No data leaves your machine.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/androvonx95/vantage">★ Star on GitHub</a>
+      <a class="btn ghost" href="#install">Get started</a>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><b>0</b><span>required dependencies</span></div>
+      <div class="stat"><b>∞</b><span>repos, fully offline</span></div>
+      <div class="stat"><b>15+</b><span>languages supported</span></div>
+      <div class="stat"><b>MIT</b><span>free forever</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="features section" id="features">
+  <div class="wrap">
+    <h2>Everything you wish your IDE showed you</h2>
+    <p class="sub">Vantage is the Swiss-army knife for understanding, securing, and shipping code faster.</p>
+    <div class="grid">
+      <div class="card"><div class="ico">🧭</div><h3>Knowledge graph</h3>
+        <p>See how every file connects. Export an interactive, zoomable map of your entire codebase in one command.</p></div>
+      <div class="card"><div class="ico">📈</div><h3>Git intelligence</h3>
+        <p>Bus-factor, churn hotspots, contributor breakdowns, and repo age — the metrics that predict risk.</p></div>
+      <div class="card"><div class="ico">🛡️</div><h3>Security &amp; quality</h3>
+        <p>Catch leaked secrets, complexity bombs, TODOs, and dead code before they reach production.</p></div>
+      <div class="card"><div class="ico">🤖</div><h3>Local AI, your way</h3>
+        <p>Runs on Ollama or any OpenAI-compatible API. Generate docs, tests, reviews, and PR descriptions.</p></div>
+      <div class="card"><div class="ico">🔒</div><h3>Private by default</h3>
+        <p>The core never touches a server. Your code stays on your machine. Always.</p></div>
+      <div class="card"><div class="ico">🪶</div><h3>Zero-config</h3>
+        <p>One <code>pip install</code>. No config files, no sign-ups, no telemetry. Just works.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="install">
+  <div class="wrap">
+    <h2>Up and running in 10 seconds</h2>
+    <p class="sub">Install, point it at any repo, and explore.</p>
+    <pre class="term"><span class="m"># install</span>
+<span class="c">pip install vantage</span>
+
+<span class="m"># launch the dashboard</span>
+<span class="c">vantage</span>
+
+<span class="m"># generate an interactive knowledge graph</span>
+<span class="c">vantage map</span>   <span class="m"># -> ./vantage-map.html</span>
+
+<span class="m"># security & quality scan</span>
+<span class="c">vantage scan</span>
+
+<span class="m"># git intelligence</span>
+<span class="c">vantage insights</span>
+
+<span class="m"># optional: enable local AI</span>
+<span class="c">ollama pull llama3.1</span>
+<span class="c">vantage ai setup</span>
+<span class="c">git diff | vantage ai review -</span></pre>
+  </div>
+</section>
+
+<section class="section pricing" id="cloud">
+  <div class="wrap">
+    <h2>Vantage Cloud <span style="font-size:16px;color:var(--muted)">(coming soon)</span></h2>
+    <p class="sub">The CLI stays free &amp; open-source forever. Vantage Cloud is the hosted companion for teams
+       that want <b>continuous</b> codebase monitoring, drift alerts, and shared configs across repositories.</p>
+    <div class="grid">
+      <div class="price"><h3>Open Source</h3><div class="amt">$0</div>
+        <ul><li>✓ Full CLI &amp; knowledge graph</li><li>✓ Git + quality scans</li>
+        <li>✓ Local AI (Ollama)</li><li>✓ MIT license</li></ul>
+        <a class="btn ghost" href="https://github.com/androvonx95/vantage">Get it</a></div>
+      <div class="price pop"><h3>Team</h3><div class="amt">$12<span style="font-size:16px;color:var(--muted)">/dev/mo</span></div>
+        <ul><li>✓ Everything in OSS</li><li>✓ Continuous monitoring</li>
+        <li>✓ Drift &amp; secret alerts</li><li>✓ Shared team configs</li>
+        <li>✓ PR annotations</li></ul>
+        <a class="btn primary" href="#waitlist">Join waitlist</a></div>
+      <div class="price"><h3>Enterprise</h3><div class="amt">Custom</div>
+        <ul><li>✓ SSO &amp; audit logs</li><li>✓ Self-hosted option</li>
+        <li>✓ Private model gateway</li><li>✓ Priority support</li></ul>
+        <a class="btn ghost" href="mailto:dev@vantage.local">Contact</a></div>
+    </div>
+
+    <div class="waitlist" id="waitlist">
+      <h3 style="margin-top:0">Be first to try Vantage Cloud</h3>
+      <p style="color:var(--muted);margin:6px 0 14px">Drop your email — we'll notify you at launch (no spam).</p>
+      <!-- Swap the action below with your own form backend (Formspree / Formsubmit / etc.) -->
+      <form action="https://formsubmit.co/karthik23110209@snuchennai.edu.in" method="POST">
+        <input type="email" name="email" placeholder="you@company.com" required />
+        <input type="hidden" name="_subject" value="Vantage Cloud waitlist signup" />
+        <input type="hidden" name="_captcha" value="false" />
+        <button class="btn primary" type="submit" style="width:100%">Join the waitlist</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="justify-content:center;display:flex">⛰ Vantage</div>
+    <p>Built with care — and a lot of <code>ast</code>. MIT Licensed.</p>
+    <div class="logos">
+      <a href="https://github.com/androvonx95/vantage">GitHub</a> ·
+      <a href="https://github.com/sponsors/androvonx95">Sponsor</a> ·
+      <a href="https://github.com/androvonx95/vantage/issues">Issues</a>
+    </div>
+    <p style="margin-top:14px">© 2026 Vantage Contributors</p>
+  </div>
+</footer>
+</body>
+</html>
