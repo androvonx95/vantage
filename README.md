@@ -3,12 +3,17 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/androvonx95/vantage/actions"><img src="https://img.shields.io/badge/build-passing-brightgreen" alt="build"></a>
+  <a href="https://github.com/androvonx95/vantage/actions/workflows/tests.yml"><img src="https://github.com/androvonx95/vantage/actions/workflows/tests.yml/badge.svg" alt="tests"></a>
+  <a href="https://github.com/androvonx95/vantage/releases"><img src="https://img.shields.io/github/v/release/androvonx95/vantage" alt="release"></a>
   <a href="https://github.com/androvonx95/vantage/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="license"></a>
   <a href="https://pypi.org/project/vantage/"><img src="https://img.shields.io/badge/pypi-v0.1.0-orange" alt="pypi"></a>
   <a href="https://github.com/androvonx95/vantage"><img src="https://img.shields.io/github/stars/androvonx95/vantage?style=social" alt="stars"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-indigo" alt="python">
-  <img src="https://img.shields.io/badge/dependencies-zero%20core-0a0" alt="deps">
+  <img src="https://img.shields.io/badge/core%20deps-zero-0a0" alt="deps">
+</p>
+
+<p align="center">
+  🌐 <a href="https://androvonx95.github.io/vantage/">Live site &amp; Vantage Cloud waitlist</a>
 </p>
 
 <h1 align="center">⛰ Vantage</h1>
