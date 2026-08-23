@@ -40,12 +40,16 @@
 ## 🚀 Install
 
 ```bash
-pip install vantage
+pip install git+https://github.com/androvonx95/vantage.git
 ```
 
 That's it — the core has **no required dependencies** beyond `rich`.
 
-> Want the optional AI networking niceties? `pip install vantage[ai]`
+> 📦 A PyPI release (`pip install vantage`) is coming soon. Want to be notified?
+> Join the [Vantage Cloud waitlist](https://androvonx95.github.io/vantage/#waitlist).
+>
+> Want the optional AI networking niceties? Append `[ai]` to the install URL:
+> `pip install "git+https://github.com/androvonx95/vantage.git#egg=vantage[ai]"`
 
 ## 🖥 Usage
 
