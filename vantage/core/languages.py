@@ -74,8 +74,8 @@ IMPORT_PATTERNS = {
 # Generic symbol extractors (best-effort, language agnostic-ish)
 RE_DEF = {
     "Python": re.compile(r"^\s*(?:def|class|async\s+def)\s+([A-Za-z_]\w*)"),
-    "JavaScript": re.compile(r"^\s*(?:function\s+([A-Za-z_$][\w$]*)|(?:const|let|var|class|function)\s+([A-Za-z_$][\w$]*)\s*[=(:])"),
-    "TypeScript": re.compile(r"^\s*(?:function\s+([A-Za-z_$][\w$]*)|(?:export\s+)?(?:const|let|var|class|interface|type|function)\s+([A-Za-z_$][\w$]*))"),
+    "JavaScript": re.compile(r"^\s*(?:function\s+([A-Za-z_$][\w$]*)|(?:const|let|var|class|function)\s+([A-Za-z_$][\w$]*)\s*[=(:{])"),
+    "TypeScript": re.compile(r"^\s*(?:function\s+([A-Za-z_$][\w$]*)|(?:export\s+)?(?:const|let|var|class|interface|type|enum|function)\s+([A-Za-z_$][\w$]*))"),
     "Go": re.compile(r"^\s*(?:func\s+(?:\([^)]*\)\s+)?([A-Za-z_]\w*)|type\s+([A-Za-z_]\w*)\s)"),
     "Rust": re.compile(r"^\s*(?:fn\s+([A-Za-z_]\w*)|struct\s+([A-Za-z_]\w*)|impl\s+([A-Za-z_]\w*)|trait\s+([A-Za-z_]\w*))"),
     "Java": re.compile(r"^\s*(?:public|private|protected|static|\s)*\s(?:class|interface|enum)\s+([A-Za-z_]\w*)"),
